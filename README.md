@@ -12,7 +12,7 @@
 
 ```sh
 NODE_ENV=production
-DB_URL=mongodb+srv://user:pass@prod-db.mongodb.net/prod_db
+DB_URL=zzz
 ```
 
 ## Project Setup
