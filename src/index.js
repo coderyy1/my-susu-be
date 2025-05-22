@@ -26,6 +26,9 @@ const app = express();
 // 中间件（如解析 JSON）
 app.use(express.json());
 
+// 公开访问 public 目录 -> 静态资源
+app.use('/static', express.static(path.resolve(__dirname, '..', 'public')));
+
 // 路由
 app.use('/api', routes);
 

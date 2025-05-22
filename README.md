@@ -7,6 +7,13 @@
 
 ## important!
   Please write the **.env** and **.env.development** and **.env.production** file
+  
+### in env file
+
+```sh
+NODE_ENV=production
+DB_URL=mongodb+srv://user:pass@prod-db.mongodb.net/prod_db
+```
 
 ## Project Setup
 
