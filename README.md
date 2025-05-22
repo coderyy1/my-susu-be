@@ -1,9 +1,12 @@
 # main
   This is a backend proj
-  use Node.js + express
+  use **Node.js** + **express**
 
 ## Path
-  routes and controllers will be used
+  **/routes** and **/controllers** will be used
+
+## important!
+  Please write the **.env** and **.env.development** and **.env.production** file
 
 ## Project Setup
 
