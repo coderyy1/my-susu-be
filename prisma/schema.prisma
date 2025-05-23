@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+
+model Photo {
+  id         Int      @id @default(autoincrement()) @map("p_id")
+  url        String   @unique @map("p_url") @db.VarChar(512)
+  desc       String? @map("p_desc") @db.VarChar(255) @default("")
+  type       String @map("p_type")
+  createdAt DateTime @default(now()) @map("created_at")
+
+   @@map("photos")
+}
+
+model Game {
+  id         Int      @id @default(autoincrement()) @map("g_id")
+  url        String   @unique @map("g_url") @db.VarChar(512)
+  desc       String? @map("g_desc") @db.VarChar(255) @default("")
+  type       String @map("g_type")
+  createdAt DateTime @default(now()) @map("created_at")
+
+   @@map("games")
+}
