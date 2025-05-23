@@ -6,3 +6,9 @@ node_modules/
 
 prisma/dev.db
 src/generated/
+
+# upload images dir
+/public/images/*
+!/public/images/.gitkeep
+uploads/
+logs/
