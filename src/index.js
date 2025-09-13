@@ -9,16 +9,18 @@ import routes from './routes/index.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// 加载正确的 .env 文件（根据 NODE_ENV）
-dotenv.config({
-  path: path.resolve(__dirname, '..', `.env.${process.env.NODE_ENV || 'development'}`)
-});
+if (process.env.NODE_ENV !== 'production') {
+  // 加载正确的 .env 文件（根据 NODE_ENV）
+  dotenv.config({
+    path: path.resolve(__dirname, '..', `.env.${process.env.NODE_ENV || 'development'}`)
+  });
+}
 
 // 使用环境变量
 const PORT = process.env.PORT || 3000;
 
 // 测试
-console.log('Loaded DB_URL:', process.env.DB_URL);
+console.log('Loaded DB_URL1:', process.env.DB_URL);
 
 
 // 初始化
@@ -33,12 +35,20 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
+if (process.env.NODE_ENV === 'development') {
+  app.disable('etag');
+  app.use((req, res, next) => {
+    res.set('Cache-Control', 'no-store');
+    next();
+  });
+}
+
 // 公开访问 public 目录 -> 静态资源
 app.use('/static', express.static(path.resolve(__dirname, '..', 'public')));
 
 // 路由
 app.use('/api', routes);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });

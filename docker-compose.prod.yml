@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    command: sh -c "npx prisma generate && npm start"
+
+  db:
+    image: mysql:8
+    restart: always
+    env_file:
+      - .env
+    volumes:
+    - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
