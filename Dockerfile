@@ -16,11 +16,13 @@ RUN npx prisma generate
 #--------runtime-------
 FROM node:18-slim
 
+RUN apt-get update -y && apt-get install -y openssl && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app /usr/src/app
 
-RUN npm install --production
+RUN npm prune --production
 
 # 暴露后端端口（如使用 3000）
 EXPOSE 3000
